@@ -5,8 +5,6 @@ const api = axios.create({
 });
 
 export const getGithubData = () => api.get('/github');
-export const getRepos = () => api.get('/repos');
-export const getProjects = () => api.get('/projects');
 export const sendContactMessage = (data) => api.post('/contact', data);
 
 export default api;

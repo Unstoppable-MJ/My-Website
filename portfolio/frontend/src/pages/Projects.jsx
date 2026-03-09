@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaStar, FaCode } from 'react-icons/fa';
-import { getProjects, getRepos } from '../services/api';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaCode } from 'react-icons/fa';
 
 const ProjectCard = ({ project, index }) => {
     return (
@@ -39,7 +38,7 @@ const ProjectCard = ({ project, index }) => {
                     <h3 className="text-2xl font-black text-white mb-3 group-hover:text-cyan-400 transition-colors">
                         {project.title}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
                         {project.description}
                     </p>
 
@@ -59,17 +58,17 @@ const ProjectCard = ({ project, index }) => {
                             rel="noopener noreferrer"
                             className="text-gray-500 flex items-center gap-2 text-sm font-bold transition-colors"
                         >
-                            <FaGithub className="text-lg" /> Source
+                            <FaGithub className="text-lg" /> Source Code
                         </motion.a>
                         <motion.a
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            href={project.live}
+                            href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-6 py-2 bg-white/5 hover:bg-cyan-500 text-white text-xs font-black rounded-lg transition-all duration-300 flex items-center gap-2 border border-white/10"
                         >
-                            <FaCode /> Open Project
+                            <FaCode /> View Project
                         </motion.a>
                     </div>
                 </div>
@@ -79,24 +78,32 @@ const ProjectCard = ({ project, index }) => {
 };
 
 const Projects = () => {
-    const [projects, setProjects] = useState([]);
-    const [repos, setRepos] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const [projectsRes, reposRes] = await Promise.all([getProjects(), getRepos()]);
-                setProjects(projectsRes.data);
-                setRepos(reposRes.data);
-            } catch (err) {
-                console.error("Error fetching data:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+    const featuredProjects = [
+        {
+            id: 1,
+            title: "Bitcoin Price Prediction",
+            description: "Machine learning system that predicts Bitcoin price trends using ARIMA, CNN, and RNN models with historical market data and backtesting.",
+            tech_stack: ["Python", "TensorFlow", "Pandas", "NumPy", "yFinance"],
+            github: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/btc_forecasting",
+            live: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/btc_forecasting"
+        },
+        {
+            id: 2,
+            title: "AI Scam Detector",
+            description: "AI-powered system that detects scam messages and suspicious content using NLP and machine learning techniques.",
+            tech_stack: ["Python", "NLP", "Machine Learning", "Scikit-learn"],
+            github: "https://github.com/Unstoppable-MJ/AI-Scam-Detector",
+            live: "https://github.com/Unstoppable-MJ/AI-Scam-Detector"
+        },
+        {
+            id: 3,
+            title: "Stock Market AI Dashboard",
+            description: "Interactive dashboard that analyzes stock market data and predicts trends using machine learning models and real-time data.",
+            tech_stack: ["Python", "FastAPI", "React", "Machine Learning", "yFinance"],
+            github: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/stock_project",
+            live: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/stock_project"
+        }
+    ];
 
     return (
         <section className="py-24 relative" id="projects">
@@ -118,82 +125,41 @@ const Projects = () => {
 
                 {/* Major Projects Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-24">
-                    {projects.map((project, index) => (
+                    {featuredProjects.map((project, index) => (
                         <ProjectCard key={project.id} project={project} index={index} />
                     ))}
                 </div>
 
-                {/* GitHub Repositories Section */}
+                {/* GitHub CTA Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-6 mb-12"
+                    className="flex flex-col items-center gap-12"
                 >
-                    <h2 className="text-3xl font-black text-white whitespace-nowrap">Open Source <span className="text-gradient">Activity</span></h2>
-                    <div className="h-[1px] bg-white/10 flex-grow" />
-                </motion.div>
+                    <div className="flex items-center gap-6 w-full">
+                        <h2 className="text-3xl font-black text-white whitespace-nowrap">Open Source <span className="text-gradient">Activity</span></h2>
+                        <div className="h-[1px] bg-white/10 flex-grow" />
+                    </div>
 
-                <div className="grid md:grid-cols-3 gap-6 mb-16">
-                    {loading ? (
-                        [...Array(3)].map((_, i) => (
-                            <div key={i} className="h-40 glass rounded-2xl animate-pulse bg-white/5 border border-white/5" />
-                        ))
-                    ) : Array.isArray(repos) ? repos.slice(0, 3).map((repo, index) => (
+                    <div className="text-center space-y-8">
+                        <p className="text-gray-400 max-w-md mx-auto italic">
+                            Building tools, contributing to communities, and sharing knowledge through open-source code.
+                        </p>
+
                         <motion.a
-                            key={repo.name}
-                            href={repo.url}
+                            href="https://github.com/Unstoppable-MJ"
                             target="_blank"
                             rel="noopener noreferrer"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            whileHover={{ y: -8, borderColor: "rgba(0, 242, 254, 0.4)", backgroundColor: "rgba(255,255,255,0.08)" }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.05 }}
-                            className="glass p-6 rounded-2xl border border-white/5 flex flex-col justify-between group h-full shadow-lg"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-12 py-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 hover:from-cyan-500 hover:to-blue-600 glass border border-white/10 rounded-full text-white font-black text-lg uppercase tracking-widest transition-all inline-flex items-center gap-4 group shadow-2xl"
                         >
-                            <div>
-                                <div className="flex justify-between items-start mb-4">
-                                    <div className="p-2 bg-cyan-500/10 rounded-lg text-cyan-400 group-hover:scale-110 transition-transform">
-                                        <FaCode />
-                                    </div>
-                                    <div className="flex items-center gap-1.5 text-yellow-500 text-xs font-mono bg-yellow-500/5 px-2 py-1 rounded-full border border-yellow-500/20">
-                                        <FaStar /> {repo.stars}
-                                    </div>
-                                </div>
-                                <h3 className="text-lg font-black text-white group-hover:text-cyan-400 transition-colors truncate mb-2">
-                                    {repo.name}
-                                </h3>
-                                <p className="text-gray-400 text-xs leading-relaxed line-clamp-2">
-                                    {repo.description || "Experimental repository exploring modern web patterns."}
-                                </p>
-                            </div>
-                            <div className="flex justify-between items-center mt-6 text-[10px] font-black uppercase tracking-widest">
-                                <span className="text-cyan-500">{repo.language || "Markdown"}</span>
-                                <span className="text-gray-600 group-hover:text-white transition-colors">GitHub →</span>
-                            </div>
+                            <FaGithub className="text-2xl group-hover:rotate-12 transition-transform" />
+                            View More on GitHub
+                            <span className="text-xl group-hover:translate-x-2 transition-transform">→</span>
                         </motion.a>
-                    )) : (
-                        <p className="text-center text-gray-500 col-span-full">No repositories found or failed to fetch.</p>
-                    )}
-                </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="flex justify-center"
-                >
-                    <motion.a
-                        href="https://github.com/Unstoppable-MJ"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="px-8 py-3 glass border border-white/10 rounded-xl text-white font-black text-sm uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-3"
-                    >
-                        <FaGithub className="text-xl" /> View More on GitHub
-                    </motion.a>
+                    </div>
                 </motion.div>
             </div>
         </section>
