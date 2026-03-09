@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { FaFileDownload } from 'react-icons/fa';
 import AnimatedBg from './Visuals/AnimatedBg';
-import profileImg from '../assets/profile.jpg'; // Using the newly added profile image
+import profileImg from '../assets/profile.png'; // Using the newly updated profile image
 
 const Hero = () => {
     const containerVariants = {
