@@ -24,16 +24,16 @@ const CodingProfiles = () => {
         {
             name: "LeetCode",
             icon: <SiLeetcode />,
-            url: "https://leetcode.com/u/Unstoppable-MJ/",
+            url: "https://leetcode.com/u/MukteshwarJoshi/",
             gradient: "from-yellow-500 to-orange-700",
             accent: "yellow",
-            username: "Unstoppable-MJ",
+            username: "MukteshwarJoshi",
             stats: "270 Problems Solved • Top 15%"
         },
         {
             name: "LinkedIn",
             icon: <FaLinkedin />,
-            url: "https://linkedin.com/in/mukteshwar-joshi",
+            url: "https://www.linkedin.com/in/mukteshwar-joshi-68bba031a",
             gradient: "from-blue-600 to-blue-800",
             accent: "blue",
             username: "mukteshwar-joshi",
