@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaCode } from 'react-icons/fa';
+import btcImg from '../assets/projects/btc.png';
+import scamImg from '../assets/projects/scam.png';
+import stockImg from '../assets/projects/stock.png';
 
 const ProjectCard = ({ project, index }) => {
     return (
@@ -14,27 +17,22 @@ const ProjectCard = ({ project, index }) => {
             {/* Animated Border Glow */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
 
-            <div className="relative glass rounded-2xl overflow-hidden h-full flex flex-col border border-white/10 hover:border-cyan-500/50 transition-colors duration-500 shadow-2xl">
-                {/* Image Placeholder with Animation */}
-                <div className="h-48 bg-gray-900/50 relative overflow-hidden flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent"></div>
-                    <motion.span
-                        animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
-                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                        className="text-gray-800 text-8xl font-black opacity-10 select-none"
-                    >
-                        {project.title[0]}
-                    </motion.span>
-                    <div className="absolute bottom-4 right-4 flex gap-2">
-                        {project.tech_stack.slice(0, 2).map((tech, i) => (
-                            <span key={i} className="px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-[10px] text-cyan-400 font-bold uppercase tracking-wider border border-cyan-500/20">
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
+            <div
+                className="relative glass rounded-2xl overflow-hidden h-full flex flex-col border border-white/10 hover:border-cyan-500/50 transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(6,182,212,0.2)]"
+            >
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0 z-0">
+                    <motion.img
+                        src={project.bg_image}
+                        alt={project.title}
+                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0"
+                        whileHover={{ scale: 1.06 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.85)] via-[rgba(0,0,0,0.55)] to-transparent"></div>
                 </div>
 
-                <div className="p-8 flex-grow flex flex-col">
+                <div className="relative z-10 p-8 flex-grow flex flex-col">
                     <h3 className="text-2xl font-black text-white mb-3 group-hover:text-cyan-400 transition-colors">
                         {project.title}
                     </h3>
@@ -84,6 +82,7 @@ const Projects = () => {
             title: "Bitcoin Price Prediction",
             description: "Machine learning system that predicts Bitcoin price trends using ARIMA, CNN, and RNN models with historical market data and backtesting.",
             tech_stack: ["Python", "TensorFlow", "Pandas", "NumPy", "yFinance"],
+            bg_image: btcImg,
             github: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/btc_forecasting",
             live: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/btc_forecasting"
         },
@@ -92,6 +91,7 @@ const Projects = () => {
             title: "AI Scam Detector",
             description: "AI-powered system that detects scam messages and suspicious content using NLP and machine learning techniques.",
             tech_stack: ["Python", "NLP", "Machine Learning", "Scikit-learn"],
+            bg_image: scamImg,
             github: "https://github.com/Unstoppable-MJ/AI-Scam-Detector",
             live: "https://github.com/Unstoppable-MJ/AI-Scam-Detector"
         },
@@ -100,6 +100,7 @@ const Projects = () => {
             title: "Stock Market AI Dashboard",
             description: "Interactive dashboard that analyzes stock market data and predicts trends using machine learning models and real-time data.",
             tech_stack: ["Python", "FastAPI", "React", "Machine Learning", "yFinance"],
+            bg_image: stockImg,
             github: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/stock_project",
             live: "https://github.com/Unstoppable-MJ/Bizmetric_Mukteshwar/tree/main/stock_project"
         }

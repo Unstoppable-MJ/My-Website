@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import { motion } from 'framer-motion';
+import Chatbot from './Chatbot';
 
 const Layout = ({ children }) => {
     return (
@@ -24,6 +25,7 @@ const Layout = ({ children }) => {
                     <p className="text-sm opacity-60">Built with React, FastAPI & Framer Motion</p>
                 </div>
             </footer>
+            <Chatbot />
         </div>
     );
 };

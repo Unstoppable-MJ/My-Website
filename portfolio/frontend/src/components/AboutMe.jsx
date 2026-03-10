@@ -54,7 +54,6 @@ const SkillCard = ({ name, level, icon: SkillIcon, description, index }) => {
 
                 <div className="space-y-1">
                     <h4 className="text-xl font-black text-white">{name}</h4>
-                    <span className="text-cyan-500 font-mono text-sm tracking-widest">{level}%</span>
                 </div>
 
                 <p className="text-gray-500 text-xs leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
