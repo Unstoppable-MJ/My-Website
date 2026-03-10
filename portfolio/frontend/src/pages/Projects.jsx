@@ -29,14 +29,14 @@ const ProjectCard = ({ project, index }) => {
                         whileHover={{ scale: 1.06 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.85)] via-[rgba(0,0,0,0.55)] to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.90)] to-[rgba(0,0,0,0.65)]"></div>
                 </div>
 
                 <div className="relative z-10 p-8 flex-grow flex flex-col">
                     <h3 className="text-2xl font-black text-white mb-3 group-hover:text-cyan-400 transition-colors">
                         {project.title}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                    <p className="text-[rgba(255,255,255,0.85)] text-sm leading-relaxed mb-6 flex-grow">
                         {project.description}
                     </p>
 
